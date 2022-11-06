@@ -1,14 +1,9 @@
 import axios from 'axios';
 import config from './config';
-import { API_HOST } from './config/constants';
 import { 
   WalletBalance, 
-  WalletBalanceItem, 
   HistoricalPortfolioValue, 
-  HistoricalPortfolioValueItem, 
   Pagination, 
-  DailyQuote, 
-  Quote, 
   TokenResponse, 
   BlockTransactionWithContractTransfers,
   TokenTransferItem, 
@@ -18,7 +13,7 @@ import {
   SingleTransactionResponse, 
   LogEventItem, 
 } from './interfaces';
-import { Chain, ChainId } from './types';
+import { ChainId } from './types';
 
 // axios-concurrency
 interface Options {
@@ -59,7 +54,7 @@ class CovalentHQAPI {
   public async getTransaction (hash: string, chainId: ChainId): Promise<SingleTransactionResponse> { 
     const url = `${this.options.endPoint}/v1/${chainId}/transaction_v2/${hash}/?key=${this.apiKey}`;
     return this.get<SingleTransactionResponse>(url);
-  };
+  }
 
   public async getTransactions (address: string, chainId: ChainId, pagination: Pagination): Promise<TransactionResponse> {
     const url = `${this.options.endPoint}/v1/${chainId}/address/${address}/transactions_v2/?key=${this.apiKey}`;
@@ -102,6 +97,7 @@ class CovalentHQAPI {
     return this.get<LogEventItem>(url, pagination);
   }
 
+  // TODO: revisit pagination
   
 
   // flood control get and axios-concurrency inspired by simplehash-api module
