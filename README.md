@@ -35,7 +35,7 @@ import * as CovalentHQ from 'covalenthq-api';
   const covalentHQ = CovalentHQ.createAPI(API_KEY);
 
   // Get token balances for address
-  //const balances = await covalentHQ.getWalletBalance(1, 'demo.eth', 'USD');
+  const balances = await covalentHQ.getTokenBalancesForAddress(address, 1);
 
   console.log(balances);
 })();
